@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-"start":"node src/server.js",
-"dev":"node src/server.js"
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
   },
   "author": "Amresh Maurya",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.6.2",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
 }
