@@ -1,18 +1,21 @@
 {
-  "name": "mern-template",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node src/server.js",
-    "dev": "node src/server.js"
-  },
-  "author": "Amresh Maurya",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^20.6.2",
-    "nodemon": "^3.0.1",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
-  }
+    "name": "mern-template",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/server.js",
+        "dev": "node src/server.js",
+        "format:check": "prettier . --check",
+        "format:fix": "prettier . --write"
+    },
+    "author": "Amresh Maurya",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^20.6.2",
+        "nodemon": "^3.0.1",
+        "prettier": "3.0.3",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.2.2"
+    }
 }
