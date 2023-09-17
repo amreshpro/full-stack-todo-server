@@ -3,13 +3,19 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "lint-staged": {
+        "*.ts": [
+            "eslint --max-warning=0"
+        ]
+    },
     "scripts": {
         "start": "node src/server.js",
         "dev": "node src/server.js",
         "format:check": "prettier . --check",
         "format:fix": "prettier . --write",
         "lint": "eslint . ",
-        "lint:fix": "eslint . --fix "
+        "lint:fix": "eslint . --fix ",
+        "prepare": "husky install"
     },
     "author": "Amresh Maurya",
     "license": "ISC",
@@ -19,6 +25,8 @@
         "@typescript-eslint/parser": "^6.7.0",
         "eslint": "^8.49.0",
         "eslint-config-prettier": "^9.0.0",
+        "husky": "^8.0.3",
+        "lint-staged": "^14.0.1",
         "nodemon": "^3.0.1",
         "prettier": "3.0.3",
         "ts-node": "^10.9.1",
