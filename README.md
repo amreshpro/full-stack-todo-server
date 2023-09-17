@@ -12,4 +12,4 @@
 -   [x] Logger setup
 -   [x] Error Handling setup
 -   [x] Tests setup
--   [ ] Create template
+-   [x] Create template
