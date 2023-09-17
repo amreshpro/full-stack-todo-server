@@ -15,7 +15,6 @@
         "sourceMap": true,
         "esModuleInterop": true,
         "strict": true,
-        "strictPropertyInitialization": false,
-       
+        "strictPropertyInitialization": false
     }
 }
