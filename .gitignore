@@ -6,3 +6,6 @@ builds
 *.env
 bun.lockb
 build
+/*.log
+/*/*.logs
+logs

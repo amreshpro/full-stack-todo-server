@@ -2,8 +2,9 @@ import { config } from 'dotenv';
 
 config();
 
-const { PORT } = process.env;
+const { PORT, LOG_LEVEL } = process.env;
 
-export default {
+export const Config = {
     PORT,
+    LOG_LEVEL,
 };

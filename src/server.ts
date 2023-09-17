@@ -1,14 +1,21 @@
-import Config from './config/index';
+import { Config } from './config/index';
 import app from './app';
+import logger from './config/logger';
 
 const startServer = () => {
+    const port = Config.PORT || 5678;
     try {
-        const port = Config.PORT || 5678;
+        // throw new Error('Something went wrong bro');
         app.listen(port, () => {
-            // console.log(`server is started at http://localhost:${port}`);
+            logger.debug(`server is started at http://localhost:${port}`);
         });
-    } catch (err) {
-        // console.log(err);
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            logger.error(err);
+            setTimeout(() => {
+                process.exit();
+            }, 1000);
+        }
     }
 };
 
