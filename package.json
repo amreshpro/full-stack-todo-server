@@ -5,7 +5,7 @@
     "main": "index.js",
     "lint-staged": {
         "*.ts": [
-            "eslint --max-warning=0"
+          "npm run lint:fix","npm run format:fix",  "eslint --max-warning=0"
         ]
     },
     "scripts": {
