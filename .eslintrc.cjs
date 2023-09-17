@@ -15,7 +15,7 @@ module.exports = {
         'no-console': 'warn',
         '@typescript-eslint/no-unused-vars': 'warn',
         '@typescript-eslint/no-empty-function': 'warn',
-        "no-misused-promises":"off",
-        "@typescript-eslint/require-await":'off'
+        'no-misused-promises': 'off',
+        '@typescript-eslint/require-await': 'off',
     },
 };

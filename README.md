@@ -7,9 +7,9 @@
 -   [x] Prettier setup
 -   [x] Eslint setup
 -   [x] Git hooks setup
--   [ ] Application config setup
--   [ ] ExpressJS app setup
--   [ ] Logger setup
--   [ ] Error Handling setup
--   [ ] Tests setup
+-   [x] Application config setup
+-   [x] ExpressJS app setup
+-   [x] Logger setup
+-   [x] Error Handling setup
+-   [x] Tests setup
 -   [ ] Create template
