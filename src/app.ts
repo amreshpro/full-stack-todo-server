@@ -5,7 +5,7 @@ import logger from './config/logger';
 const app = express();
 
 app.get('/', (req: Request, res: Response) => {
-    res.send({ name: 'Amresh', message: 'it Works bro!' });
+    res.send({ name: 'Amresh', message: 'it Works big bro!' });
 });
 
 //middleware
