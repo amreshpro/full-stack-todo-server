@@ -3,17 +3,19 @@ import logger from '../config/logger';
 import { Request, Response } from 'express';
 
 interface TodoTypes {
-    task: string;
-    isTaskCompleted: boolean;
+    _id?: string;
+    date?: string;
+    task?: string;
+    isTaskCompleted?: boolean;
 }
 
 class TodoController {
+    // add todo
     static async addTodo(req: Request, res: Response) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const reqBody: TodoTypes = await req.body;
-
         //destructuring req body
-        const { task, isTaskCompleted } = reqBody;
+        const todoReqBody: TodoTypes = await req.body;
+
+        const { task, isTaskCompleted } = todoReqBody;
 
         const isAlreadyPresent = await Todo.findOne({ task });
 
@@ -22,6 +24,8 @@ class TodoController {
                 status: 'failure',
                 message: 'this todo is already created',
             }).status(208);
+
+            return;
         }
 
         //pass data in schema
@@ -38,6 +42,70 @@ class TodoController {
             status: 'success',
             message: 'Data saved Successfully in our Database',
         });
+    }
+
+    //delete todo
+    static async deleteTodo(req: Request, res: Response) {
+        const { id } = await req.body;
+        logger.info(req.body);
+
+        const isExisted = await Todo.find({ id });
+        logger.info(isExisted);
+
+        if (isExisted) {
+            const deleteRes = await Todo.deleteOne({ _id: id });
+
+            logger.info({ ...deleteRes });
+            if (deleteRes.deletedCount)
+                res.json({
+                    status: 'success',
+                    message: 'Todo deleted successfully',
+                });
+            res.json({
+                status: 'failure',
+                message: 'Todo is not deleted. Something went wrong',
+            });
+        }
+    }
+
+    //edit todo
+    static async editTodo(req: Request, res: Response) {
+        const { id, task, isTaskCompleted } = await req.body;
+        logger.info(req.body);
+
+        const isExisted = await Todo.find({ id });
+        logger.info(isExisted);
+
+        if (isExisted) {
+            const editedRes = await Todo.updateOne(
+                { _id: id },
+                { $set: { task, isTaskCompleted } },
+            );
+
+            logger.info({ ...editedRes });
+            if (editedRes)
+                res.json({
+                    status: 'success',
+                    message: 'Todo edited successfully',
+                });
+            res.json({
+                status: 'failure',
+                message: 'Todo is not deleted. Something went wrong',
+            });
+
+            return;
+        }
+    }
+
+    // getAllTodo
+    static async getAllTodo(req: Request, res: Response) {
+        try {
+            const allTodoResponse = await Todo.find({});
+            logger.info(allTodoResponse);
+            res.json(allTodoResponse);
+        } catch (error) {
+            logger.error(error);
+        }
     }
 }
 

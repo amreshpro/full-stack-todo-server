@@ -17,5 +17,6 @@ module.exports = {
         '@typescript-eslint/no-empty-function': 'warn',
         'no-misused-promises': 'off',
         '@typescript-eslint/require-await': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
     },
 };
