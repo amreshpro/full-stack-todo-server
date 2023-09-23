@@ -9,7 +9,7 @@ const logger = winston.createLogger({
         winston.format.timestamp(),
         winston.format.json(),
     ),
-    defaultMeta: { service: 'user-service' },
+    defaultMeta: { service: 'todo-backend' },
     transports: [
         new winston.transports.File({
             dirname: 'logs',
