@@ -1,4 +1,4 @@
-import Todo from '../model/Todo';
+import Todo from '../model/todo.model';
 import logger from '../config/logger';
 import { Request, Response } from 'express';
 
@@ -101,8 +101,35 @@ class TodoController {
     static async getAllTodo(req: Request, res: Response) {
         try {
             const allTodoResponse = await Todo.find({});
-            logger.info(allTodoResponse);
-            res.json(allTodoResponse);
+            if (allTodoResponse) {
+                logger.info(allTodoResponse);
+                res.json(allTodoResponse);
+            }
+
+            res.json({
+                status: 'success',
+                message: 'Todo List is empty. Please enter some new todo.',
+            });
+        } catch (error) {
+            logger.error(error);
+        }
+    }
+
+    //get Todo by Id
+    static async getTodoById(req: Request, res: Response) {
+        try {
+            const { id } = req.body;
+
+            const resById = await Todo.find({ id });
+            if (resById) {
+                logger.info(resById);
+                res.json(resById);
+            }
+
+            res.json({
+                status: 'success',
+                message: 'Todo List is empty. Please enter some new todo.',
+            });
         } catch (error) {
             logger.error(error);
         }

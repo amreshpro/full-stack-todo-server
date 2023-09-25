@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import logger from './config/logger';
-import todoRouter from './routes/todoRoutes';
+import todoRouter from './routes/todo.routes';
 import connectDB from './db/connectDB';
 import { Config } from './config';
 import cors from 'cors';

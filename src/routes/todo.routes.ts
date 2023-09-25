@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import TodoController from '../controllers/todoController';
+import TodoController from '../controllers/todo.controller';
 import express from 'express';
 
 const todoRouter = express.Router();
@@ -10,5 +10,6 @@ const todoRouter = express.Router();
 todoRouter.post('/save', TodoController.addTodo);
 todoRouter.post('/delete', TodoController.deleteTodo);
 todoRouter.post('/list', TodoController.getAllTodo);
+todoRouter.post('/item', TodoController.getTodoById);
 
 export default todoRouter;
