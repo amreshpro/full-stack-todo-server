@@ -10,6 +10,7 @@ const todoRouter = express.Router();
 todoRouter.post('/save', TodoController.addTodo);
 todoRouter.post('/delete', TodoController.deleteTodo);
 todoRouter.post('/list', TodoController.getAllTodo);
+todoRouter.post('/edit', TodoController.editTodo);
 todoRouter.post('/item', TodoController.getTodoById);
 
 export default todoRouter;

@@ -25,23 +25,26 @@ app.use('/todo', todoRouter);
 
 //middleware
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
-    if (err instanceof Error) {
-        logger.error(err.message);
+app.use(
+    '/',
+    (err: unknown, req: Request, res: Response, next: NextFunction) => {
+        if (err instanceof Error) {
+            logger.error(err.message);
 
-        const statusCode = 500;
+            const statusCode = 500;
 
-        res.status(statusCode).json({
-            errors: [
-                {
-                    type: err.name,
-                    msg: err.message,
-                    path: '',
-                    location: '',
-                },
-            ],
-        });
-    }
-});
+            res.status(statusCode).json({
+                errors: [
+                    {
+                        type: err.name,
+                        msg: err.message,
+                        path: '',
+                        location: '',
+                    },
+                ],
+            });
+        }
+    },
+);
 
 export default app;

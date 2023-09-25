@@ -40,7 +40,7 @@ class TodoController {
         logger.info('savedInDB successfully');
         res.json({
             status: 'success',
-            message: 'Data saved Successfully in our Database',
+            message: 'Item saved Successfully in our Database',
         });
     }
 
@@ -56,44 +56,54 @@ class TodoController {
             const deleteRes = await Todo.deleteOne({ _id: id });
 
             logger.info({ ...deleteRes });
-            if (deleteRes.deletedCount)
+            if (deleteRes.deletedCount) {
                 res.json({
                     status: 'success',
                     message: 'Todo deleted successfully',
                 });
-            res.json({
-                status: 'failure',
-                message: 'Todo is not deleted. Something went wrong',
-            });
+            } else {
+                res.json({
+                    status: 'failure',
+                    message: 'Todo is not deleted. Something went wrong',
+                });
+            }
         }
     }
 
     //edit todo
     static async editTodo(req: Request, res: Response) {
         const { id, task, isTaskCompleted } = await req.body;
-        logger.info(req.body);
-
-        const isExisted = await Todo.find({ id });
-        logger.info(isExisted);
-
-        if (isExisted) {
-            const editedRes = await Todo.updateOne(
-                { _id: id },
-                { $set: { task, isTaskCompleted } },
-            );
-
-            logger.info({ ...editedRes });
-            if (editedRes)
-                res.json({
-                    status: 'success',
-                    message: 'Todo edited successfully',
-                });
+        console.log(req.body);
+        if (!id && !task && !isTaskCompleted)
             res.json({
                 status: 'failure',
-                message: 'Todo is not deleted. Something went wrong',
+                message: 'Data is empty of short in length',
             });
+        else {
+            const isExisted = await Todo.find({ id });
+            logger.info(isExisted);
 
-            return;
+            if (isExisted) {
+                const editedRes = await Todo.updateOne(
+                    { _id: id },
+                    { $set: { task, isTaskCompleted } },
+                );
+
+                logger.info({ ...editedRes });
+                if (editedRes) {
+                    res.json({
+                        status: 'success',
+                        message: 'Todo edited successfully',
+                    });
+                } else {
+                    res.json({
+                        status: 'failure',
+                        message: 'Todo is not deleted. Something went wrong',
+                    });
+                }
+
+                return;
+            }
         }
     }
 
@@ -104,12 +114,12 @@ class TodoController {
             if (allTodoResponse) {
                 logger.info(allTodoResponse);
                 res.json(allTodoResponse);
+            } else {
+                res.json({
+                    status: 'success',
+                    message: 'Todo List is empty. Please enter some new todo.',
+                });
             }
-
-            res.json({
-                status: 'success',
-                message: 'Todo List is empty. Please enter some new todo.',
-            });
         } catch (error) {
             logger.error(error);
         }
@@ -124,12 +134,12 @@ class TodoController {
             if (resById) {
                 logger.info(resById);
                 res.json(resById);
+            } else {
+                res.json({
+                    status: 'success',
+                    message: 'Todo List is empty. Please enter some new todo.',
+                });
             }
-
-            res.json({
-                status: 'success',
-                message: 'Todo List is empty. Please enter some new todo.',
-            });
         } catch (error) {
             logger.error(error);
         }
