@@ -1,15 +1,8 @@
-## Checklist for express project initial setup
+## Todo
+### MERN - Todo
 
--   [x] Git Setup
--   [x] Node Version Manager Setup
--   [x] NodeJS Project Setup
--   [x] Typescript setup
--   [x] Prettier setup
--   [x] Eslint setup
--   [x] Git hooks setup
--   [x] Application config setup
--   [x] ExpressJS app setup
--   [x] Logger setup
--   [x] Error Handling setup
--   [x] Tests setup
--   [x] Create template
+
+
+
+!['todo'](_resources/Screenshot%20from%202023-09-26%2011-07-46.png)
+
