@@ -7,10 +7,10 @@ const todoRouter = express.Router();
 
 // save
 // eslint-disable-next-line @typescript-eslint/unbound-method, @typescript-eslint/no-misused-promises
-todoRouter.post('/save', TodoController.addTodo);
-todoRouter.post('/delete', TodoController.deleteTodo);
-todoRouter.post('/list', TodoController.getAllTodo);
-todoRouter.post('/edit', TodoController.editTodo);
-todoRouter.post('/item', TodoController.getTodoById);
+todoRouter.post('/add', TodoController.addTodo);
+todoRouter.delete('/delete', TodoController.deleteTodo);
+todoRouter.get('/list', TodoController.getAllTodo);
+todoRouter.put('/edit', TodoController.editTodo);
+todoRouter.post('/id', TodoController.getTodoById);
 
 export default todoRouter;

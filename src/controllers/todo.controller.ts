@@ -12,36 +12,44 @@ interface TodoTypes {
 class TodoController {
     // add todo
     static async addTodo(req: Request, res: Response) {
-        //destructuring req body
-        const todoReqBody: TodoTypes = await req.body;
+        try {
+            //destructuring req body
+            const todoReqBody: TodoTypes = await req.body;
 
-        const { task, isTaskCompleted } = todoReqBody;
+            const { task, isTaskCompleted = false } = todoReqBody;
 
-        const isAlreadyPresent = await Todo.findOne({ task });
+            const isAlreadyPresent = await Todo.findOne({ task });
 
-        if (isAlreadyPresent) {
-            res.json({
-                status: 'failure',
-                message: 'this todo is already created',
-            }).status(208);
+            if (isAlreadyPresent) {
+                res.json({
+                    status: 'failure',
+                    message: 'this todo is already created',
+                }).status(208);
 
-            return;
+                return;
+            }
+
+            if (!task) {
+                res.json({ status: 'failure', message: 'task is empty' });
+            } else {
+                //pass data in schema
+                const doc = new Todo({
+                    task,
+                    isTaskCompleted,
+                    date: new Date(),
+                });
+
+                // save todo in mongodb
+                await doc.save();
+                logger.info('savedIn DB successfully');
+                res.json({
+                    status: 'success',
+                    message: 'Todo saved Successfully in our Database',
+                });
+            }
+        } catch (error) {
+            res.json(error);
         }
-
-        //pass data in schema
-        const doc = new Todo({
-            task,
-            isTaskCompleted,
-            date: new Date(),
-        });
-
-        // save todo in mongodb
-        await doc.save();
-        logger.info('savedInDB successfully');
-        res.json({
-            status: 'success',
-            message: 'Item saved Successfully in our Database',
-        });
     }
 
     //delete todo
@@ -73,7 +81,7 @@ class TodoController {
     //edit todo
     static async editTodo(req: Request, res: Response) {
         const { id, task, isTaskCompleted } = await req.body;
-        console.log(req.body);
+
         if (!id && !task && !isTaskCompleted)
             res.json({
                 status: 'failure',
@@ -130,7 +138,8 @@ class TodoController {
         try {
             const { id } = req.body;
 
-            const resById = await Todo.find({ id });
+            const resById = await Todo.findById({ _id: id });
+            console.log(resById);
             if (resById) {
                 logger.info(resById);
                 res.json(resById);
